@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  server:
+    image: webapp:0.02
+    container_name: server
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+  client:
+    image: app:0.01
+    container_name: client
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8080:80"
+    depends_on:
+      - server
+      - client
+    networks:
+      - app-network
+    
+networks:
+  app-network:
