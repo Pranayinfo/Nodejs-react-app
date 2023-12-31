@@ -12,3 +12,6 @@ COPY --from=build /app .
 EXPOSE 5000
 CMD ["node", "index.js"]
 
+# Author and Maintainer Information
+LABEL author="Pranay Paunikar"
+LABEL maintainer="Pranay Paunikar"
